@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Port Scanner | My Project</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            background-color: #161b22;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h1 { color: #58a6ff; }
+        .tag {
+            background-color: #238636;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+        pre {
+            background-color: #010409;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #30363d;
+            color: #79c0ff;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #1f6feb;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn:hover { background-color: #388bfd; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🌐 Basic Network Port Scanner</h1>
+        <span class="tag">Python</span>
+        <span class="tag">Cybersecurity</span>
+        <span class="tag">Networking</span>
+
+        <p>This is a simple, fast, and efficient Network Port Scanner built using Python's built-in <code>socket</code> library. It helps identify open network ports on a target IP address.</p>
+
+        <h3>How it works:</h3>
+        <ul>
+            <li>Attempts TCP connections to a specified range of ports.</li>
+            <li>Uses a short timeout for rapid scanning.</li>
+            <li>Handles exceptions like keyboard interrupts and unresolved hostnames gracefully.</li>
+        </ul>
+
+        <h3>Python Source Code:</h3>
+        <pre><code># You can view the full code in the scanner.py file in this repository.
+import socket
+from datetime import datetime
+# ... (Core logic uses socket.connect_ex to find open ports) ...</code></pre>
+
+        <a href="https://github.com/YOUR_USERNAME/Network-Port-Scanner" class="btn">View Full Code on GitHub</a>
+    </div>
+
+</body>
+</html>
