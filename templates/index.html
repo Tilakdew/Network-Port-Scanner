@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Port Scanner</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #f0f2f5; padding-top: 50px; }
+        .box { background: white; padding: 20px; border-radius: 8px; display: inline-block; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input { padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer; }
+        #result { margin-top: 20px; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Network Port Scanner</h2>
+        <input type="text" id="ipInput" placeholder="Enter IP (e.g. 127.0.0.1)">
+        <button onclick="startScan()">Scan Now</button>
+        <div id="result"></div>
+    </div>
 
+    <script>
+        async function startScan() {
+            const ip = document.getElementById('ipInput').value;
+            const resDiv = document.getElementById('result');
+            resDiv.innerHTML = "Scanning... please wait...";
+
+            const formData = new FormData();
+            formData.append('ip', ip);
+
+            const response = await fetch('/scan', { method: 'POST', body: formData });
+            const data = await response.json();
+
+            if (data.ports.length > 0) {
+                resDiv.innerHTML = `Open Ports on ${data.target}: ` + data.ports.join(', ');
+            } else {
+                resDiv.innerHTML = "No open ports found (1-100).";
+            }
+        }
+    </script>
+</body>
+</html>
