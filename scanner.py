@@ -1,40 +1,29 @@
+from flask import Flask, render_template, request, jsonify
 import socket
-import sys
-from datetime import datetime
 
-def basic_scanner(target):
-    print("-" * 50)
-    print(f"Scanning Target: {target}")
-    print(f"Time started: {datetime.now()}")
-    print("-" * 50)
+app = Flask(__name__)
 
-    try:
-        # Scanning ports 1 to 100 for demonstration
-        for port in range(1, 101):
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(0.1) # Short timeout for faster scanning
-            
-            result = sock.connect_ex((target, port))
-            
-            if result == 0:
-                print(f"[+] Port {port}: OPEN")
-            sock.close()
+# Ye function ports scan karega
+def scan_logic(target):
+    open_ports = []
+    for port in range(1, 101): # 1 se 100 ports tak scan
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(0.1)
+        result = sock.connect_ex((target, port))
+        if result == 0:
+            open_ports.append(port)
+        sock.close()
+    return open_ports
 
-    except KeyboardInterrupt:
-        print("\nExiting Program.")
-        sys.exit()
-    except socket.gaierror:
-        print("\nHostname could not be resolved.")
-        sys.exit()
-    except socket.error:
-        print("\nCould not connect to server.")
-        sys.exit()
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-    print("-" * 50)
-    print("Scanning Completed.")
+@app.route('/scan', methods=['POST'])
+def scan():
+    target_ip = request.form.get('ip')
+    found_ports = scan_logic(target_ip)
+    return jsonify({'ports': found_ports, 'target': target_ip})
 
-# Run the scanner on localhost
-if __name__ == "__main__":
-    target_ip = "127.0.0.1" 
-    basic_scanner(target_ip)
-    
+if __name__ == '__main__':
+    app.run(debug=True) # Localhost start karne ke liye
